@@ -34,9 +34,9 @@ public class Crime {
         mTitle = title;
     }
 
-    public String getDate() {
-        SimpleDateFormat df2 = new SimpleDateFormat("EEE, dd MMM yyyy");
-        return df2.format(mDate);
+    public Date getDate() {
+
+        return mDate;
     }
 
     public void setDate(Date date) {
