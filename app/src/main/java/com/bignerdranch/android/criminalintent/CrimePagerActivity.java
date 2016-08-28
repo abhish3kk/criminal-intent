@@ -3,11 +3,13 @@ package com.bignerdranch.android.criminalintent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,15 +20,16 @@ import java.util.UUID;
 
 public class CrimePagerActivity extends AppCompatActivity {
     private static final String EXTRA_CRIME_ID = "com.bignerdranch.android.criminalintent.crime_id";
+    private boolean mSubtitleVisible;
 
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
 
-    public static Intent newIntent(Context packageContext, UUID crimeId){
+    /*public static Intent newIntent(Context packageContext, UUID crimeId){
         Intent intent = new Intent(packageContext, CrimePagerActivity.class);
         intent.putExtra(EXTRA_CRIME_ID, crimeId);
         return intent;
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -58,5 +61,22 @@ public class CrimePagerActivity extends AppCompatActivity {
                 break;
             }
         }
+
+        mSubtitleVisible = (boolean) getIntent().getBooleanExtra(CrimeListFragment.SAVED_SUBTITLE_VISIBLE, false);
     }
+
+    public static Intent newIntent(Context packageContext, UUID crimeId, boolean showSubtitle) {
+        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
+        intent.putExtra(EXTRA_CRIME_ID,crimeId);
+        intent.putExtra(CrimeListFragment.SAVED_SUBTITLE_VISIBLE, showSubtitle);
+        return intent;
+    }
+
+    @Nullable
+    @Override
+    public Intent getParentActivityIntent() {
+
+        return CrimeListActivity.newIntent(CrimePagerActivity.this, mSubtitleVisible);
+    }
+
 }
