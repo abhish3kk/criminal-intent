@@ -23,7 +23,7 @@ import java.util.List;
  * Created by abhishek on 8/12/16.
  */
 public class CrimeListFragment extends Fragment {
-    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+    public static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
 
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
@@ -32,6 +32,8 @@ public class CrimeListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSubtitleVisible = getArguments().getBoolean(SAVED_SUBTITLE_VISIBLE);
         setHasOptionsMenu(true);
     }
 
@@ -43,6 +45,8 @@ public class CrimeListFragment extends Fragment {
 
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
+        }else {
+            mSubtitleVisible = getActivity().getIntent().getBooleanExtra(SAVED_SUBTITLE_VISIBLE, false);
         }
 
         updateUI();
@@ -81,7 +85,7 @@ public class CrimeListFragment extends Fragment {
             case R.id.menu_item_new_crime:
                 Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
-                Intent intent = CrimePagerActivity.newIntent(getActivity(), crime.getId());
+                Intent intent = CrimePagerActivity.newIntent(getActivity(), crime.getId(), mSubtitleVisible);
                 startActivity(intent);
                 return true;
 
@@ -123,6 +127,15 @@ public class CrimeListFragment extends Fragment {
         updateSubtitle();
     }
 
+    public static CrimeListFragment newInstance(boolean showSubtitle) {
+        Bundle args = new Bundle();
+        args.putBoolean(CrimeListFragment.SAVED_SUBTITLE_VISIBLE, showSubtitle);
+
+        CrimeListFragment fragment = new CrimeListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Crime mCrime;
         private TextView mTitleTextView;
@@ -147,7 +160,7 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View v){
-            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId(), mSubtitleVisible);
             startActivity(intent);
         }
     }
