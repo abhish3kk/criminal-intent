@@ -4,9 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.bignerdranch.android.criminalintent.CrimeDbSchema.CrimeTable;
-
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -82,6 +81,7 @@ public class CrimeLab {
         return sCrimeLab;
     }
 
+
     public void updateCrime(Crime crime) {
         String uuidString = crime.getId().toString();
         ContentValues values = getContentValues(crime);
@@ -103,5 +103,11 @@ public class CrimeLab {
         );
 
         return new CrimeCursorWrapper(cursor);
+    }
+
+    public void deleteCrime(Crime crime) {
+        Log.i("CrimeLab","CrimesCountbefore = ");
+//        mCrimes.remove(crime);
+
     }
 }
