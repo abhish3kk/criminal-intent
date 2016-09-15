@@ -1,6 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,5 +42,11 @@ public class CrimeLab {
             sCrimeLab = new CrimeLab(context);
         }
         return sCrimeLab;
+    }
+
+    public void deleteCrime(Crime crime) {
+        Log.i("CrimeLab","CrimesCountbefore = ");
+        mCrimes.remove(crime);
+//        Log.i("CrimeLab","DeleteCrimeCrimeId = "+crimeId);
     }
 }

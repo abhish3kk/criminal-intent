@@ -7,6 +7,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -114,6 +115,7 @@ public class CrimeListFragment extends Fragment {
     }
 
     private void updateUI(){
+        Log.i("CrimeListFragment","upDateUI");
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 
@@ -121,9 +123,9 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         }else{
+            //mAdapter.notifyItemChanged(mItemPosition);
             mAdapter.notifyDataSetChanged();
         }
-
         updateSubtitle();
     }
 
