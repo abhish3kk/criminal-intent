@@ -103,19 +103,22 @@ public class CrimeListFragment extends Fragment {
 
     private void updateSubtitle() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
-        int crimeCount = crimeLab.getCrimes().size();
-        String subtitle = getString(R.string.subtitle_format, ""+crimeCount+"");
 
-        if (!mSubtitleVisible) {
-            subtitle = null;
+        int crimeSize = crimeLab.getCrimes().size();
+
+        if (crimeSize > 0){
+            String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize);
+
+            if (!mSubtitleVisible) {
+                subtitle = null;
+            }
+
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            activity.getSupportActionBar().setSubtitle(subtitle);
         }
-
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
     private void updateUI(){
-        Log.i("CrimeListFragment","upDateUI");
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 
