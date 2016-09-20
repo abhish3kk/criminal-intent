@@ -24,8 +24,8 @@ import java.util.UUID;
 
 public class CrimeFragment extends Fragment {
     private static final String ARG_CRIME_ID = "crime_id";
-    private static final String DIALOG_DATE = "DialogDate";
-    private static final int REQUEST_DATE = 0;
+    private static final String DIALOG_DATE  = "DialogDate";
+    private static final int    REQUEST_DATE = 0;
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -110,5 +110,13 @@ public class CrimeFragment extends Fragment {
 
     private void updateDate() {
         mDateButton.setText(mCrime.getDate().toString());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        CrimeLab.get(getActivity())
+                .updateCrime(mCrime);
     }
 }
