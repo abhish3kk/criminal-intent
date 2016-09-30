@@ -109,5 +109,6 @@ public class CrimeLab {
         Log.i("CrimeLab","CrimesCountbefore = ");
 //        mCrimes.remove(crime);
         mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ? ", new String[] {crime.getId().toString()});
+
     }
 }
