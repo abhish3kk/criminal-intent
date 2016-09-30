@@ -10,7 +10,7 @@
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="time_picker_title">Time of crime:</string>
     <string name="create_crime_button">Add Crime</string>
-
+    <string name="toast_delete_crime">Crime Deleted</string>
     <string name="delete_crime">Delete Crime</string>
     <plurals name="subtitle_plural">
         <item quantity="one">%1$s crime</item>

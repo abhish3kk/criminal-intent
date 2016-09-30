@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Date;
 import java.util.UUID;
@@ -40,7 +41,6 @@ public class CrimeFragment extends Fragment {
     private Button mDateButton;
     private Button mTimeButton;
     private CheckBox mSolvedCheckBox;
-    private Button mDeleteButton;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -155,8 +155,8 @@ public class CrimeFragment extends Fragment {
 
         switch (item.getItemId()) {
             case R.id.menu_item_delete_crime:
-                Log.i(TAG,"ontoptionsselected menu"+mCrime.getId());
                 CrimeLab.get(getActivity()).deleteCrime(mCrime);
+                Toast.makeText(getActivity(), R.string.toast_delete_crime, Toast.LENGTH_SHORT).show();
                 getActivity().finish();
                 return true;
 
