@@ -113,14 +113,17 @@ public class CrimeListFragment extends Fragment {
 
         int crimeSize = crimeLab.getCrimes().size();
 
-        if (crimeSize > 0){
-            String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize);
-            if (!mSubtitleVisible) {
-                subtitle = null;
-            }
-            AppCompatActivity activity = (AppCompatActivity) getActivity();
-            activity.getSupportActionBar().setSubtitle(subtitle);
+        String subtitle = getResources().getQuantityString(R.plurals.subtitle_plural, crimeSize, crimeSize);
+
+        if (!mSubtitleVisible) {
+            subtitle = null;
         }
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if (crimeSize == 0){
+            subtitle = "";
+        }
+        activity.getSupportActionBar().setSubtitle(subtitle);
+
     }
 
     private void updateUI(){
