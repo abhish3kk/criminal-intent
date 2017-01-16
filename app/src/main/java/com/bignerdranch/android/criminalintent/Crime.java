@@ -15,10 +15,15 @@ public class Crime {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
+    private String mSuspect;
 
     public Crime(){
         // Generate unique identifier
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Crime(UUID id) {
+        mId = id;
         mDate = new Date();
     }
 
@@ -34,9 +39,9 @@ public class Crime {
         mTitle = title;
     }
 
-    public String getDate() {
-        SimpleDateFormat df2 = new SimpleDateFormat("EEE, dd MMM yyyy");
-        return df2.format(mDate);
+    public Date getDate() {
+
+        return mDate;
     }
 
     public void setDate(Date date) {
@@ -49,5 +54,14 @@ public class Crime {
 
     public void setSolved(boolean solved) {
         mSolved = solved;
+    }
+
+
+    public String getSuspect() {
+        return mSuspect;
+    }
+
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
     }
 }
